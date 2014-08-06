@@ -1,0 +1,38 @@
+h1.title {
+    border-bottom: 1px solid #aaa;
+}
+
+.todos {
+    padding-left: 0;
+}
+
+.todo {
+    list-style: none;
+    border: 1px solid #efefef;
+    padding: 10px;
+    background-color: #fcfcfc;
+}
+
+.todo p {
+    margin: 0;
+}
+
+.todo.completed {
+    opacity:  .4;
+}
+
+.todo .task {
+    width: 100%;
+}
+
+.todo.mine {
+    background-color: #fefefe;
+}
+
+header.title {
+    margin: 0 auto 20px auto;
+}
+
+header.title h1 {
+    margin: 0;
+}
