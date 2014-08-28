@@ -34,7 +34,12 @@
                         <td>{{ $user->updated_at }}</td>
                         <td>
                             @if($canI('manage', $user))
-                                @include('shared._table_actions', ['resource' => 'users', 'key' => $user->id])
+                                <a href="{{ URL::route("users.edit", [$user->id]) }}" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </a>
+                                <a href="{{ URL::route("users.destroy", [$user->id]) }}" class="btn btn-danger destroy" data-method="delete">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
                             @endif
                         </td>
                     </tr>

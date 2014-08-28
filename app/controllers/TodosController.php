@@ -6,7 +6,7 @@ class TodosController extends BaseController
 
     public function index()
     {
-        return Response::json(Todo::allForUser(Auth::user()));
+        return Response::json(Todo::withUsers()->get());
     }
 
     public function store()

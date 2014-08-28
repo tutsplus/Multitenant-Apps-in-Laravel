@@ -9,14 +9,9 @@ class Todo extends Eloquent
         return $this->belongsTo('User');
     }
 
-    public static function allForUser($user)
+    public function scopeWithUsers($query)
     {
-        return static::with('user')->orderBy('created_at')->get();
-    }
-
-    public function scopeForUser($query, $user)
-    {
-        return $query->where('user_id', $user->id);
+        return $query->with('user')->orderBy('created_at');
     }
 
     public function getCompletedAttribute($value)

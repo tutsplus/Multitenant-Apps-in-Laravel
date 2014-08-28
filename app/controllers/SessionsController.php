@@ -2,11 +2,12 @@
 
 class SessionsController extends BaseController
 {
-    protected $layout = "layouts.sign-in";
+    protected $layout   = "layouts.account";
+    protected $viewBase = "sessions";
 
     public function create()
     {
-        return View::make('layouts.sign-in');
+        $this->view('create');
     }
 
     public function store()
@@ -23,6 +24,7 @@ class SessionsController extends BaseController
         $redirect = Redirect::route('sign-in');
 
         if (Auth::check()) {
+            Auth::logout();
             return $redirect->withSuccess('Signed out successfully');
         } else {
             return $redirect;
