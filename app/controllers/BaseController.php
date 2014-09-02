@@ -4,6 +4,7 @@ class BaseController extends Controller
 {
     protected $layout = 'layouts.application';
     protected $viewBase = '';
+    protected $currentUser;
 
     protected function setupLayout()
     {
@@ -17,5 +18,14 @@ class BaseController extends Controller
         $view = View::make("{$this->viewBase}.{$viewName}", $data);
         $this->layout->content = $view;
         return $view;
+    }
+
+    protected function currentUser()
+    {
+        if (! $this->currentUser) {
+            $this->currentUser = Auth::user() ?: new Guest();
+        }
+
+        return $this->currentUser;
     }
 }

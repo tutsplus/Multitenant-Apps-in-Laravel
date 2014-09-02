@@ -12,7 +12,9 @@ class SessionsController extends BaseController
 
     public function store()
     {
-        if (Auth::attempt(Input::only('email', 'password'), Input::get('remember'))) {
+        $fields = array_merge(Input::only('email', 'password'), ['active' => true]);
+
+        if (Auth::attempt($fields, Input::get('remember'))) {
             return Redirect::to('/')->withSuccess('Signed in successfully');
         } else {
             return Redirect::route('sign-in')->withError('Invalid username or password');

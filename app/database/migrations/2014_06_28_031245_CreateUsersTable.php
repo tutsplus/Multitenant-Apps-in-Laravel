@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration {
             $table->string('remember_token', 100)->index()->nullable();
             $table->string('name', 255)->nullable();
             $table->boolean('admin')->default(false)->nullable();
+            $table->boolean('active')->default(false)->index()->nullable();
             $table->timestamps();
         });
     }

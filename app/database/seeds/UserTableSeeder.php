@@ -12,12 +12,10 @@ class UserTableSeeder extends Seeder
             User::create([
                 'name'     => ucfirst($username),
                 'email'    => "{$username}@example.com",
-                'password' => Hash::make($username)
+                'password' => $username,
+                'active'   => true,
+                'admin'    => starts_with($username, 'admin')
             ]);
         }
-
-        $adminUser = User::where('name', 'Admin')->first();
-        $adminUser->admin = true;
-        $adminUser->save();
     }
 }

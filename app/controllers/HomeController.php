@@ -4,8 +4,8 @@ class HomeController extends BaseController
 {
     protected $viewBase = 'home';
 
-    public function index()
+    public function show()
     {
-        $this->view('index');
+        $this->view('show');
     }
 }

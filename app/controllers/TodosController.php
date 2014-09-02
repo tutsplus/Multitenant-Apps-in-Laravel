@@ -11,7 +11,7 @@ class TodosController extends BaseController
 
     public function store()
     {
-        $form = new TodoForm(Input::only('name', 'completed'), Auth::user(), new Todo());
+        $form = new TodoCreation($this->currentUser(), $this->params());
 
         if ($form->save()) {
             return Response::json($form->getTodo(), 201);
@@ -22,7 +22,7 @@ class TodosController extends BaseController
 
     public function update(Todo $todo)
     {
-        $form = new TodoForm(Input::only('name', 'completed'), Auth::user(), $todo);
+        $form = new TodoChange($this->currentUser(), $todo, $this->params());
 
         if ($form->save()) {
             return Response::json($form->getTodo(), 200);
@@ -35,5 +35,10 @@ class TodosController extends BaseController
     {
         $todo->delete();
         return Response::json(null, 204);
+    }
+
+    protected function params()
+    {
+        return Input::only('name', 'completed');
     }
 }

@@ -12,20 +12,19 @@ class UsersController extends BaseController
 
     public function create()
     {
-        $user = new User();
-        $this->view('create', compact('user'));
+        $this->view('create');
     }
 
     public function store()
     {
-        $registration = new UserAdminRegistration(Input::get('user'), new User());
+        $invite = new UserInvite(Input::get('email'));
 
-        if ($registration->save()) {
+        if ($invite->save()) {
             return Redirect::route('users.index')
-                ->withSuccess('User created successfully');
+                ->withSuccess('User invited successfully');
         } else {
-            $this->view('create', ['user' => $registration->getUser()])
-                ->withErrors($registration->getErrors());
+            $this->view('create', ['user' => $invite->getUser()])
+                ->withErrors($invite->getErrors());
         }
     }
 
@@ -36,14 +35,14 @@ class UsersController extends BaseController
 
     public function update(User $user)
     {
-        $registration = new UserAdminRegistration(Input::get('user'), $user);
+        $change = new UserChange($user, Input::get('user'));
 
-        if ($registration->save()) {
+        if ($change->save()) {
             return Redirect::route('users.index')
                 ->withSuccess('User updated successfully');
         } else {
-            $this->view('edit', compact('user'))
-                ->withErrors($registration->getErrors());
+            $this->view('edit', ['user' => $invite->getUser()])
+                ->withErrors($change->getErrors());
         }
     }
 

@@ -16,7 +16,7 @@ Route::post('sign-in',    ['as' => 'sign-in',  'uses' => 'SessionsController@sto
 Route::delete('sign-out', ['as' => 'sign-out', 'uses' => 'SessionsController@destroy']);
 
 Route::group(['before' => 'auth'], function() {
-    Route::get('/', "HomeController@index");
+    Route::get('/', "HomeController@show");
 
     Route::resource('todos', 'TodosController'); // Will remove for manual routes maybe?
     Route::model('todos', 'Todo');

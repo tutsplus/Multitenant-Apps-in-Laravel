@@ -5,9 +5,9 @@
                 <h1>Users</h1>
             </div>
             <div class="col-sm-2">
-                @if($canI('manage', 'User'))
+                @if($canI('invite', 'User'))
                     <nav class="pull-right">
-                        <a class="btn btn-primary" href="{{ URL::route('users.create') }}">Add New User</a>
+                        <a class="btn btn-primary" href="{{ URL::route('users.create') }}">Invite New User</a>
                     </nav>
                 @endif
             </div>
@@ -28,8 +28,16 @@
                 @foreach ($users as $user)
                     <tr class="user">
                         <td>{{ $user->id }}</td>
-                        <td><a href="{{ URL::route('users.edit', $user->id) }}">{{ $user->name }}</a></td>
-                        <td>{{ $user->email }}</td>
+                        <td>
+                            @if ($user->name)
+                                <a href="{{ URL::route('users.edit', $user->id) }}">{{ $user->name }}</a></td>
+                            @else
+                                <span class="label block label-danger">Invited</span>
+                            @endif
+                        </td>
+                        <td>
+                            {{ $user->email }}
+                        </td>
                         <td>{{ $user->created_at }}</td>
                         <td>{{ $user->updated_at }}</td>
                         <td>
