@@ -4,6 +4,11 @@ class TodosController extends BaseController
 {
     protected $viewBase = 'todos';
 
+    public function __construct()
+    {
+        $this->beforeFilter('@authorize', ['except' => 'index']);
+    }
+
     public function index()
     {
         return Response::json(Todo::withUsers()->get());
@@ -40,5 +45,14 @@ class TodosController extends BaseController
     protected function params()
     {
         return Input::only('name', 'completed');
+    }
+
+    protected function authorize($route, $request)
+    {
+        $allowed = App::make('canI')->can('manage', $route->parameter('todos'));
+
+        if (! $allowed) {
+            return App::abort(401);
+        }
     }
 }

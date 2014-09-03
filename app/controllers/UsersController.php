@@ -4,6 +4,12 @@ class UsersController extends BaseController
 {
     protected $viewBase = "users";
 
+    public function __construct()
+    {
+        $this->beforeFilter('@authorize', ['only' => ['edit', 'update', 'destroy']]);
+        $this->beforeFilter('@authorizeInvite', ['only' => ['store', 'create']]);
+    }
+
     public function index()
     {
         $users = User::all();
@@ -51,5 +57,23 @@ class UsersController extends BaseController
         $user->delete();
         return Redirect::route('users.index')
             ->withSuccess('User deleted successfully');
+    }
+
+    public function authorize($route, $request)
+    {
+        $allowed = App::make('canI')->can('manage', $route->parameter('users'));
+
+        if (! $allowed) {
+            return App::abort(401);
+        }
+    }
+
+    public function authorizeInvite($route, $request)
+    {
+        $allowed = App::make('canI')->can('invite', 'User');
+
+        if (! $allowed) {
+            return App::abort(401);
+        }
     }
 }
