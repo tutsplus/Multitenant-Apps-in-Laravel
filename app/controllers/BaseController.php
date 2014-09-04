@@ -5,6 +5,7 @@ class BaseController extends Controller
     protected $layout = 'layouts.application';
     protected $viewBase = '';
     protected $currentUser;
+    protected $currentOrg;
 
     protected function setupLayout()
     {
@@ -27,5 +28,14 @@ class BaseController extends Controller
         }
 
         return $this->currentUser;
+    }
+
+    protected function currentOrg()
+    {
+        if (! $this->currentOrg) {
+            $this->currentOrg = $this->currentUser()->organization;
+        }
+
+        return $this->currentOrg;
     }
 }

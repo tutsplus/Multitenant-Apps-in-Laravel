@@ -12,7 +12,7 @@ class UsersController extends BaseController
 
     public function index()
     {
-        $users = User::all();
+        $users = $this->currentOrg()->users;
         $this->view('index', compact('users'));
     }
 

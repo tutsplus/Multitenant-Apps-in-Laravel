@@ -7,5 +7,6 @@ class OrganizationTableSeeder extends Seeder
         DB::table('organizations')->truncate();
 
         Organization::create(['name' => 'Toodoo']);
+        Organization::create(['name' => 'Envato']);
     }
 }

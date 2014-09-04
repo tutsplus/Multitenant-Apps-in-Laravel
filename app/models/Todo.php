@@ -14,6 +14,12 @@ class Todo extends Eloquent
         return $query->with('user')->orderBy('created_at');
     }
 
+    public function scopeForOrganization($query, $org)
+    {
+        return $query->withUsers()
+            ->whereIn('user_id', $org->users()->lists('id'));
+    }
+
     public function getCompletedAttribute($value)
     {
         return (bool)$value;
