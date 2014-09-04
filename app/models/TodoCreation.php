@@ -21,7 +21,7 @@ class TodoCreation
         $success = false;
 
         if ($this->isValid()) {
-            $this->user->todos()->insert($this->todo);
+            $this->user->todos()->save($this->todo);
             $success = (bool) $this->todo;
         }
 
