@@ -36,5 +36,5 @@ View::share('currentUser', Auth::check() ? Auth::user() : new Guest);
 View::share('isLoggedIn', Auth::check());
 
 View::share('canI', function($action, $entity) {
-    return App::make('canI')->can($action, $entity);
+    return CanI::can($action, $entity);
 });

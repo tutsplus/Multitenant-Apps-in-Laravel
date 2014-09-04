@@ -49,7 +49,7 @@ class TodosController extends BaseController
 
     protected function authorize($route, $request)
     {
-        $allowed = App::make('canI')->can('manage', $route->parameter('todos'));
+        $allowed = CanI::can('manage', $route->parameter('todos'));
 
         if (! $allowed) {
             return App::abort(401);

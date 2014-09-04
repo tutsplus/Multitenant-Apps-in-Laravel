@@ -70,7 +70,7 @@ class UsersController extends BaseController
 
     public function authorizeInvite($route, $request)
     {
-        $allowed = App::make('canI')->can('invite', 'User');
+        $allowed = CanI::can('invite', 'User');
 
         if (! $allowed) {
             return App::abort(401);
