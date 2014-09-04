@@ -23,7 +23,7 @@ class UsersController extends BaseController
 
     public function store()
     {
-        $invite = new UserInvite(Input::get('email'));
+        $invite = new UserInvite(Input::get('email'), $this->currentUser()->organization);
 
         if ($invite->save()) {
             return Redirect::route('users.index')

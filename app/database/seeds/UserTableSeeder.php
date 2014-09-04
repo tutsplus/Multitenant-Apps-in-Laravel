@@ -8,14 +8,19 @@ class UserTableSeeder extends Seeder
 
         $usernames = ['machuga', 'second', 'third', 'admin'];
 
-        foreach($usernames as $username) {
-            User::create([
-                'name'     => ucfirst($username),
-                'email'    => "{$username}@example.com",
-                'password' => $username,
-                'active'   => true,
-                'admin'    => starts_with($username, 'admin')
-            ]);
+        foreach(Organization::all() as $org) {
+            foreach($usernames as $username) {
+                $username = $org->isVendor() ? $username : $username.$org->id;
+
+                User::create([
+                    'organization_id' => $org->id,
+                    'name'            => ucfirst($username),
+                    'email'           => "{$username}@example.com",
+                    'password'        => $username,
+                    'active'          => true,
+                    'admin'           => starts_with($username, 'admin')
+                ]);
+            }
         }
     }
 }
