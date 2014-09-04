@@ -15,6 +15,11 @@ Route::get('sign-in',     ['as' => 'sign-in',  'uses' => 'SessionsController@cre
 Route::post('sign-in',    ['as' => 'sign-in',  'uses' => 'SessionsController@store']);
 Route::delete('sign-out', ['as' => 'sign-out', 'uses' => 'SessionsController@destroy']);
 
+Route::group(['before' => 'guest'], function() {
+    Route::get('sign-up',     ['as' => 'sign-up',  'uses' => 'SignupsController@create']);
+    Route::post('sign-up',    ['as' => 'sign-up',  'uses' => 'SignupsController@store']);
+});
+
 Route::group(['before' => 'auth'], function() {
     Route::get('/', "HomeController@show");
 

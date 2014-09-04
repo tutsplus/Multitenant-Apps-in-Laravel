@@ -10,5 +10,6 @@
         <input type="hidden" name="remember" value="0">
         <input type="checkbox" name="remember" value="1"> Remember me
     </label>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+    <a class="btn btn-lg btn-default btn-block" href="{{ URL::route('sign-up') }}">Sign Up</a>
 </form>
