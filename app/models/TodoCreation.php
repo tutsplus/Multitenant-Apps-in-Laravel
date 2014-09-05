@@ -8,12 +8,13 @@ class TodoCreation
     protected $user;
     protected $params;
 
-    public function __construct($user, $params)
+    public function __construct($user, $org, $params)
     {
         $this->user      = $user;
         $this->params    = $params;
         $this->todo      = new Todo($params);
         $this->validator = Validator::make($params, ['name' => 'required']);
+        $this->todo->organization_id = $org->id;
     }
 
     public function save()

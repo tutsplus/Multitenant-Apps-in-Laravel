@@ -16,7 +16,7 @@ class TodosController extends BaseController
 
     public function store()
     {
-        $form = new TodoCreation($this->currentUser(), $this->params());
+        $form = new TodoCreation($this->currentUser(), $this->currentOrg(), $this->params());
 
         if ($form->save()) {
             return Response::json($form->getTodo(), 201);

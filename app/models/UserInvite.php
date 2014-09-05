@@ -22,10 +22,10 @@ class UserInvite
         $success = false;
         $this->user->password        = $this->user->email.time();
         $this->user->active          = false;
-        $this->user->organization_id = $this->org->id;
 
         if ($this->isValid()) {
             $success = (bool) $this->user->save();
+            $this->user->organizations()->attach($this->org->id);
         }
 
         return $success;

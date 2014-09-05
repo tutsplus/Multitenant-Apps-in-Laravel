@@ -14,12 +14,12 @@ class Organization extends Eloquent
 
     public function users()
     {
-        return $this->hasMany('User');
+        return $this->belongsToMany('User')->withTimestamps();
     }
 
     public function todos()
     {
-        return $this->hasManyThrough('Todo', 'User')->with('user');
+        return $this->hasMany('Todo')->with('user');
     }
 
     public function isVendor()

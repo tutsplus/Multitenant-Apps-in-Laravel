@@ -22,9 +22,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         });
     }
 
-    public function organization()
+    public function organizations()
     {
-        return $this->belongsTo('Organization');
+        return $this->belongsToMany('Organization')->withTimestamps();
     }
 
     public function todos()
@@ -47,6 +47,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         foreach ($this->todos as $todo) {
             $todo->delete();
         }
+
+        $user->organizations()->detach();
 
         parent::delete();
     }

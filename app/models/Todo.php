@@ -9,6 +9,11 @@ class Todo extends Eloquent
         return $this->belongsTo('User');
     }
 
+    public function organization()
+    {
+        return $this->belongsTo('Organization');
+    }
+
     public function scopeWithUsers($query)
     {
         return $query->with('user')->orderBy('created_at');
@@ -16,8 +21,7 @@ class Todo extends Eloquent
 
     public function scopeForOrganization($query, $org)
     {
-        return $query->withUsers()
-            ->whereIn('user_id', $org->users()->lists('id'));
+        return $query->withUsers()->where('organization_id', $org->id);
     }
 
     public function getCompletedAttribute($value)
