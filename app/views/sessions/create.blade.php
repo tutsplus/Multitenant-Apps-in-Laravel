@@ -1,4 +1,4 @@
-<form class="form-signin" role="form" method="post" action="{{ URL::route('sign-in') }}">
+<form class="form-signin" role="form" method="post" action="{{ tenantRoute('sign-in') }}">
     <h1>Toodoo</h1>
 
     @include('shared._notifications')
@@ -11,5 +11,5 @@
         <input type="checkbox" name="remember" value="1"> Remember me
     </label>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
-    <a class="btn btn-lg btn-default btn-block" href="{{ URL::route('sign-up') }}">Sign Up</a>
+    <a class="btn btn-lg btn-default btn-block" href="{{ tenantRoute('sign-up') }}">Sign Up</a>
 </form>

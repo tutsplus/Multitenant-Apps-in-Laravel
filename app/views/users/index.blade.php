@@ -7,7 +7,7 @@
             <div class="col-sm-2">
                 @if($canI('invite', 'User'))
                     <nav class="pull-right">
-                        <a class="btn btn-primary" href="{{ URL::route('users.create') }}">Invite New User</a>
+                        <a class="btn btn-primary" href="{{ tenantRoute('users.create') }}">Invite New User</a>
                     </nav>
                 @endif
             </div>
@@ -30,7 +30,7 @@
                         <td>{{ $user->id }}</td>
                         <td>
                             @if ($user->name)
-                                <a href="{{ URL::route('users.edit', $user->id) }}">{{ $user->name }}</a></td>
+                                <a href="{{ tenantRoute('users.edit', $user->id) }}">{{ $user->name }}</a></td>
                             @else
                                 <span class="label block label-danger">Invited</span>
                             @endif
@@ -42,10 +42,10 @@
                         <td>{{ $user->updated_at }}</td>
                         <td>
                             @if($canI('manage', $user))
-                                <a href="{{ URL::route("users.edit", [$user->id]) }}" class="btn btn-default">
+                                <a href="{{ tenantRoute("users.edit", [$user->id]) }}" class="btn btn-default">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </a>
-                                <a href="{{ URL::route("users.destroy", [$user->id]) }}" class="btn btn-danger destroy" data-method="delete">
+                                <a href="{{ tenantRoute("users.destroy", [$user->id]) }}" class="btn btn-danger destroy" data-method="delete">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a>
                             @endif

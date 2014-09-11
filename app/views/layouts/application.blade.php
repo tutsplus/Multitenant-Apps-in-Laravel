@@ -22,6 +22,8 @@
 
         <script>
             window.currentUser = {{ json_encode($currentUser) }};
+            window.currentOrg  = {{ json_encode($currentOrg) }};
+            window.todosRoute  = "{{ tenantRoute('todos.index') }}";
         </script>
         <script type="text/javascript" src="/scripts/vendor/jquery.min.js"></script>
         <script type="text/javascript" src="/scripts/vendor/bootstrap.min.js"></script>

@@ -20,13 +20,16 @@ Route::group(['before' => 'guest'], function() {
     Route::post('sign-up',    ['as' => 'sign-up',  'uses' => 'SignupsController@store']);
 });
 
-Route::group(['before' => 'auth'], function() {
+Route::group(['before' => 'auth|tenant'], function() {
     Route::get('/', "HomeController@show");
 
-    Route::resource('todos', 'TodosController'); // Will remove for manual routes maybe?
+    Route::resource('organizations', 'OrganizationsController', ['only' => 'show']);
+    Route::model('organizations', 'Organization');
+
+    Route::resource('organizations.todos', 'TodosController'); // Will remove for manual routes maybe?
     Route::model('todos', 'Todo');
 
-    Route::resource('users', 'UsersController');
+    Route::resource('organizations.users', 'UsersController');
     Route::model('users', 'User');
 });
 
@@ -43,3 +46,16 @@ View::share('isLoggedIn', Auth::check());
 View::share('canI', function($action, $entity) {
     return CanI::can($action, $entity);
 });
+
+function tenantRoute($route, $params = [])
+{
+    $params = (array) $params;
+
+    if (! starts_with($route, ['sign-', 'organizations.']) && ! isset($params['organizations'])) {
+        $org    = Route::current()->parameter('organizations');
+        $route  = 'organizations.'.$route;
+        $params = array_merge(['organizations' => $org->id], $params);
+    }
+
+    return URL::route($route, $params);
+}

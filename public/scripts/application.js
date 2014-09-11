@@ -115,7 +115,7 @@ toodoo.directive('todoFocus', function todoFocus($timeout) {
 });
 
 toodoo.factory('todoStorage', function($http) {
-    var url = '/todos/';
+    var url = window.todosRoute + '/';
     var todoStorage = {
         all: function() {
             return $http.get(url).then(function(response) {

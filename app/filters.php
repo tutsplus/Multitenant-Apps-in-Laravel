@@ -22,6 +22,11 @@ App::after(function($request, $response)
 	//
 });
 
+Route::filter('tenant', function($route) {
+    $org = $route->parameter('organizations');
+
+    $org && View::share('currentOrg', $org);
+});
 /*
 |--------------------------------------------------------------------------
 | Authentication Filters

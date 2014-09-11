@@ -33,7 +33,7 @@ class BaseController extends Controller
     protected function currentOrg()
     {
         if (! $this->currentOrg) {
-            $this->currentOrg = $this->currentUser()->organization;
+            $this->currentOrg = Route::current()->parameter('organizations');
         }
 
         return $this->currentOrg;

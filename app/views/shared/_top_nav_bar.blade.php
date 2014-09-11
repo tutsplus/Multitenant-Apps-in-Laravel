@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ URL::to('/') }}">Toodoo</a>
+            <a class="navbar-brand" href="{{ tenantRoute('organizations.show', $currentOrg->id) }}">Toodoo | {{ $currentOrg->name }}</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -20,14 +20,15 @@
                     <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $currentUser }} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ URL::route('users.index') }}">Users</a></li>
-                        <li><a href="{{ URL::route('users.edit', $currentUser->id) }}">Edit Profile</a></li>
+                        <li><a href="{{ URL::to('/') }}">Organizations</a></li>
+                        <li><a href="{{ tenantRoute('users.index') }}">Users</a></li>
+                        <li><a href="{{ tenantRoute('users.edit', $currentUser->id) }}">Edit Profile</a></li>
                         <li class="divider"></li>
-                        <li><a href="{{ URL::route('sign-out') }}" data-method="delete">Sign out</a></li>
+                        <li><a href="{{ tenantRoute('sign-out') }}" data-method="delete">Sign out</a></li>
                     </ul>
                     </li>
                 @else
-                    <li><a href="{{ URL::route('sign-in') }}">Sign in</a></li>
+                    <li><a href="{{ tenantRoute('sign-in') }}">Sign in</a></li>
                 @endif
             </ul>
         </div><!-- /.navbar-collapse -->
