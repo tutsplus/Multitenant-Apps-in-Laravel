@@ -7,7 +7,7 @@
             <ul>
                 @foreach ($orgs as $org)
                     <li>
-                        <a href="{{ tenantRoute('organizations.show', $org->id) }}">{{ $org->name }}</a>
+                        <a href="{{ tenantRoute('organizations.show', $org->slug) }}">{{ $org->name }}</a>
                     </li>
                 @endforeach
             </ul>

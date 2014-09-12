@@ -11,25 +11,30 @@
 |
 */
 
-Route::get('sign-in',     ['as' => 'sign-in',  'uses' => 'SessionsController@create']);
-Route::post('sign-in',    ['as' => 'sign-in',  'uses' => 'SessionsController@store']);
-Route::delete('sign-out', ['as' => 'sign-out', 'uses' => 'SessionsController@destroy']);
+Route::group(['domain' => 'toodoo.dev', 'before' => 'guest'], function() {
+    Route::get('sign-in',     ['as' => 'sign-in',  'uses' => 'SessionsController@create']);
+    Route::post('sign-in',    ['as' => 'sign-in',  'uses' => 'SessionsController@store']);
 
-Route::group(['before' => 'guest'], function() {
     Route::get('sign-up',     ['as' => 'sign-up',  'uses' => 'SignupsController@create']);
     Route::post('sign-up',    ['as' => 'sign-up',  'uses' => 'SignupsController@store']);
 });
 
-Route::group(['before' => 'auth|tenant'], function() {
-    Route::get('/', "HomeController@show");
+Route::group(['domain' => 'toodoo.dev', 'before' => 'auth'], function() {
+    Route::get('/', ['uses' => 'HomeController@show', 'as' => 'home']);
 
-    Route::resource('organizations', 'OrganizationsController', ['only' => 'show']);
-    Route::model('organizations', 'Organization');
+    Route::delete('sign-out', ['as' => 'sign-out', 'uses' => 'SessionsController@destroy']);
+});
 
-    Route::resource('organizations.todos', 'TodosController'); // Will remove for manual routes maybe?
+Route::group(['domain' => '{organizations}.toodoo.dev', 'before' => 'auth|tenant'], function() {
+    Route::get('/', ['uses' => 'OrganizationsController@show', 'as' => 'organizations.show']);
+    Route::bind('organizations', function($value, $route) {
+        return Organization::where('slug', $value)->firstOrFail();
+    });
+
+    Route::resource('todos', 'TodosController'); // Will remove for manual routes maybe?
     Route::model('todos', 'Todo');
 
-    Route::resource('organizations.users', 'UsersController');
+    Route::resource('users', 'UsersController');
     Route::model('users', 'User');
 });
 
@@ -53,8 +58,7 @@ function tenantRoute($route, $params = [])
 
     if (! starts_with($route, ['sign-', 'organizations.']) && ! isset($params['organizations'])) {
         $org    = Route::current()->parameter('organizations');
-        $route  = 'organizations.'.$route;
-        $params = array_merge(['organizations' => $org->id], $params);
+        $params = array_merge(['organizations' => $org->slug], $params);
     }
 
     return URL::route($route, $params);

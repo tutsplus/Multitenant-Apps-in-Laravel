@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ tenantRoute('organizations.show', $currentOrg->id) }}">Toodoo | {{ $currentOrg->name }}</a>
+            <a class="navbar-brand" href="{{ tenantRoute('organizations.show', $currentOrg->slug) }}">Toodoo | {{ $currentOrg->name }}</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -20,7 +20,7 @@
                     <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $currentUser }} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ URL::to('/') }}">Organizations</a></li>
+                        <li><a href="{{ URL::route('home') }}">Organizations</a></li>
                         <li><a href="{{ tenantRoute('users.index') }}">Users</a></li>
                         <li><a href="{{ tenantRoute('users.edit', $currentUser->id) }}">Edit Profile</a></li>
                         <li class="divider"></li>

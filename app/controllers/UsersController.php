@@ -79,6 +79,6 @@ class UsersController extends BaseController
 
     public function redirectToIndex()
     {
-        return Redirect::route('organizations.users.index', [$this->currentOrg()->id]);
+        return Redirect::route('users.index', [$this->currentOrg()->slug]);
     }
 }
