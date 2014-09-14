@@ -22,6 +22,8 @@ Route::group(['domain' => 'toodoo.dev', 'before' => 'guest'], function() {
 Route::group(['domain' => 'toodoo.dev', 'before' => 'auth'], function() {
     Route::get('/', ['uses' => 'HomeController@show', 'as' => 'home']);
 
+    Route::get('dashboard', ['uses' => 'HomeController@dashboard', 'as' => 'dashboard']);
+
     Route::delete('sign-out', ['as' => 'sign-out', 'uses' => 'SessionsController@destroy']);
 });
 
