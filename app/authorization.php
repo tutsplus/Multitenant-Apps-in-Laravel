@@ -4,6 +4,10 @@ $canI = new CanI\CanI(Auth::user());
 
 if (Auth::check()) {
     if (Auth::user()->isAdmin()) {
+        $canI->allow('manage', 'Organization', function($org) {
+            return $this->getUser()->isMemberOf($org);
+        });
+
         $canI->allow('invite', 'User');
         $canI->allow('manage', 'User', function($user) {
             return $this->getUser()->organization_id === $user->organization_id;

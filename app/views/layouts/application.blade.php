@@ -5,6 +5,7 @@
         <link rel="stylesheet" type="text/css" href="/styles/normalize.css">
         <link rel="stylesheet" type="text/css" href="/styles/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="/styles/application.css">
+        <link rel="stylesheet" type="text/css" href="/styles/organization-custom.css">
     </head>
 
     <body>

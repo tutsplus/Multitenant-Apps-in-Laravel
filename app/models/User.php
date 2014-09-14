@@ -32,6 +32,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $this->hasMany('Todo')->orderBy('created_at');
     }
 
+    public function isMemberOf($org)
+    {
+        return $this->organizations->contains($org->id);
+    }
+
     public function isAdmin()
     {
         return $this->admin;

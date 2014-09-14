@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Fluent;
+
 class Organization extends Eloquent
 {
     protected static $vendor;
@@ -25,5 +27,26 @@ class Organization extends Eloquent
     public function isVendor()
     {
         return $this->id === static::vendor()->id;
+    }
+
+    public function getDataAttribute($value)
+    {
+        $data = $value ? json_decode($value, true) : [];
+        return new Fluent($data);
+    }
+
+    public function setDataAttribute($value)
+    {
+        $this->attributes['data'] = json_encode($value);
+    }
+
+    public function getCssAttribute($value)
+    {
+        return new Fluent($this->data->css ?: []);
+    }
+
+    public function setCssAttribute($value)
+    {
+        $this->data = array_merge($this->data->toArray(), ['css' => $value]);
     }
 }

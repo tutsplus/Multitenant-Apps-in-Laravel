@@ -21,6 +21,9 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $currentUser }} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ URL::route('home') }}">Organizations</a></li>
+                        @if ($canI('manage', $currentOrg))
+                            <li><a href="{{ tenantRoute('settings') }}">Organization Settings</a></li>
+                        @endif
                         <li><a href="{{ tenantRoute('users.index') }}">Users</a></li>
                         <li><a href="{{ tenantRoute('users.edit', $currentUser->id) }}">Edit Profile</a></li>
                         <li class="divider"></li>

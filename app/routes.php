@@ -27,6 +27,10 @@ Route::group(['domain' => 'toodoo.dev', 'before' => 'auth'], function() {
 
 Route::group(['domain' => '{organizations}.toodoo.dev', 'before' => 'auth|tenant'], function() {
     Route::get('/', ['uses' => 'OrganizationsController@show', 'as' => 'organizations.show']);
+
+    Route::get('settings', ['uses' => 'OrganizationsController@edit', 'as' => 'settings']);
+    Route::put('settings', ['uses' => 'OrganizationsController@update', 'as' => 'settings']);
+
     Route::bind('organizations', function($value, $route) {
         return Organization::where('slug', $value)->firstOrFail();
     });
@@ -36,6 +40,13 @@ Route::group(['domain' => '{organizations}.toodoo.dev', 'before' => 'auth|tenant
 
     Route::resource('users', 'UsersController');
     Route::model('users', 'User');
+
+    Route::get('styles/organization-custom.css', function(Organization $org) {
+        $response = Response::make(View::make('organizations.css', ['css' => $org->css]));
+        $response->header('Content-Type', 'text/css');
+
+        return $response;
+    });
 });
 
 View::composer('shared._notifications', function($view) {
