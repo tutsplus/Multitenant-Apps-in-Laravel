@@ -79,6 +79,14 @@ App::down(function()
 |
 */
 
+App::bind('setDbConnection', function($app, $db) {
+    Config::set("database.connections.{$db}", [
+        'driver'   => 'sqlite',
+        'database' => app_path()."/database/tenants/{$db}.sqlite",
+        'prefix'   => '',
+    ]);
+});
+
 require app_path().'/filters.php';
 
 require app_path().'/authorization.php';

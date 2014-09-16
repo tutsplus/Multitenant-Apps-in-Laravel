@@ -11,3 +11,9 @@
 |
 */
 
+use Symfony\Component\Console\Input\ArgvInput;
+
+$argv = new ArgvInput();
+$db   = $argv->getParameterOption('--database');
+
+App::make('setDbConnection', $db);
