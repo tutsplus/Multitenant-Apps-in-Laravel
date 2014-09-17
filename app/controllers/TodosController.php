@@ -25,7 +25,7 @@ class TodosController extends BaseController
         }
     }
 
-    public function update(Todo $todo)
+    public function update(Organization $org, Todo $todo)
     {
         $form = new TodoChange($this->currentUser(), $todo, $this->params());
 
@@ -36,7 +36,7 @@ class TodosController extends BaseController
         }
     }
 
-    public function destroy(Todo $todo)
+    public function destroy(Organization $org, Todo $todo)
     {
         $todo->delete();
         return Response::json(null, 204);

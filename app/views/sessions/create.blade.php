@@ -1,4 +1,4 @@
-<form class="form-signin" role="form" method="post" action="{{ URL::route('sign-in') }}">
+<form class="form-signin" role="form" method="post" action="{{ tenantRoute('sign-in') }}">
     <h1>Toodoo</h1>
 
     @include('shared._notifications')

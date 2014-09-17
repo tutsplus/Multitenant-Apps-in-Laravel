@@ -87,6 +87,19 @@ App::bind('setDbConnection', function($app, $db) {
     ]);
 });
 
+App::singleton('tenant', function() {
+    $server = explode('.', Request::getHost());
+
+    if (count($server) === 3 && $server !== 'www') {
+        return Organization::where('slug', $server[0])->firstOrFail();
+    }
+});
+
+if (! App::runningInConsole()) {
+    App::make('setDbConnection', App::make('tenant')->slug);
+    Config::set('database.default', App::make('tenant')->slug);
+}
+
 require app_path().'/filters.php';
 
 require app_path().'/authorization.php';
