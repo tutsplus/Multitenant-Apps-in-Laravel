@@ -1,4 +1,32 @@
-## Laravel PHP Framework
+
+### Tuts+ Course: Building Multitenant Apps in Laravel
+**Instructor: Matthew Machuga**
+
+Multitenant apps are all over the web, but tackling your first one can be challenging.  This course walks you through developing a multitenant application in Laravel 4.2, covering both single-database and multi-database tenancy styles.  
+
+Source files for the Tuts+ course: [Building Multitenant Apps in Laravel](https://courses.tutsplus.com/courses/)
+
+**Available on Tuts+ October, 2014**
+
+---
+
+### Using These Source Files
+
+In this repository, you'll find a fully functioning Laravel 4.2 application.  To boot:
+
+- Launch the web server via `php artisan serve --host=127.0.0.1`
+- Run `rm app/database/production.sqlite && touch app/database/production.sqlite` to clear out the main database (multidb and singledb branches have incompatible structures)
+- Use `git tag` to fetch a list of all available tags
+- Use `git checkout <tagname>` to checkout a tag at a given point in the app
+- Run `php artisan migrate --seed` to both migrate and seed the database for that point in the app.
+
+If you'd like to look around, the `app/models` and `app/database/migrations` directories have the bulk of the interesting code.  Just checkout which branch you'd like to inspect.
+
+If you are interested in front end code, the Angular app lives at `public/application.js`.  It isn't a pure example of how to write angular code, but it might be fun to look at.  Many of the concepts came from TodoMVC.
+
+---
+
+### Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
 [![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
