@@ -4,9 +4,8 @@
 
 Multitenant apps are all over the web, but tackling your first one can be challenging.  This course walks you through developing a multitenant application in Laravel 4.2, covering both single-database and multi-database tenancy styles.  
 
-Source files for the Tuts+ course: [Building Multitenant Apps in Laravel](https://courses.tutsplus.com/courses/)
+Source files for the Tuts+ course: [Building Multitenant Apps in Laravel](https://code.tutsplus.com/courses/building-multitenant-apps-in-laravel)
 
-**Available on Tuts+ October, 2014**
 
 ---
 
